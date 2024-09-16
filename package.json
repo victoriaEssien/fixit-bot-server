@@ -9,9 +9,13 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@google/generative-ai": "^0.17.1",
+    "@google/generative-ai": "^0.1.1",
+    "chromadb": "^1.8.1",
     "cors": "^2.8.5",
+    "csv-parser": "^3.0.0",
     "dotenv": "^16.4.5",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "fs": "^0.0.1-security",
+    "openai": "^4.58.1"
   }
 }

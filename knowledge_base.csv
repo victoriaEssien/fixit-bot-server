@@ -1,0 +1,7 @@
+Category,Device,Issue,Solution
+Laptop,Windows 10,Slow performance,1. Close unnecessary programs. 2. Check for malware. 3. Free up disk space. 4. Update drivers.
+Laptop,Windows 10,No internet connection,1. Restart the router. 2. Check network cables. 3. Ensure Wi-Fi is enabled. 4. Update network drivers.
+Phone,Android,App crashing,1. Clear app cache. 2. Update the app. 3. Reinstall the app. 4. Restart the phone.
+Phone,iPhone,Not charging,1. Check charging cable. 2. Clean the charging port. 3. Try a different power source. 4. Restart the iPhone.
+MiFi,,No signal,1. Move to a location with better coverage. 2. Restart the MiFi device. 3. Check for network outages. 4. Verify SIM card is correctly inserted.
+MiFi,,Slow internet speed,1. Check for network congestion. 2. Restart the MiFi device. 3. Ensure firmware is up to date. 4. Contact service provider.
