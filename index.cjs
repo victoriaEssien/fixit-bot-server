@@ -113,14 +113,15 @@ app.post('/api/chat', async (req, res) => {
     // Prepare response
     const additionalInfo = solution 
       ? `Additional Info: ${solution}` 
-      : `Sorry, I couldn't find a solution for your issue. Here are some tech support contacts:\n\n${getTechSupportContacts()}`;
+      : `Here are some tech support contacts that could assist you better!:\n\n${getTechSupportContacts()}`;
 
     res.status(200).json({ reply: `${text}\n\n${additionalInfo}` });
   } catch (error) {
     console.error('Error processing the AI response:', error);
-    res.status(500).json({ error: 'Failed to process the AI response' });
+    res.status(500).json({ error: `Failed to process the AI response: ${error.message}` });
   }
 });
+
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
