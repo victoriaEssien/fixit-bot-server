@@ -16,7 +16,6 @@ app.use(express.json());
 const allowedOrigins = ['http://localhost:5173', 'https://fixit-bot.vercel.app'];
 app.use(cors({
   origin: (origin, callback) => {
-    // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
     if (allowedOrigins.includes(origin)) {
       callback(null, true);
@@ -39,10 +38,18 @@ fs.createReadStream('knowledge_base.csv')
     console.log('CSV file successfully processed');
   });
 
+// List of tech support experts or agencies
+const techSupportList = [
+  { name: 'TechSupport Agency', contact: 'support@techagency.com', phone: '+1-800-555-0199' },
+  { name: 'IT Help Desk', contact: 'helpdesk@ithelp.com', phone: '+1-800-555-0177' },
+  { name: 'Gadget Gurus', contact: 'info@gadgetgurus.com', phone: '+1-800-555-0123' },
+  { name: 'Computer Fixers', contact: 'contact@computerfixers.com', phone: '+1-800-555-0165' }
+];
+
 // Function to get solutions based on device and issue
 function getSolution(device, issue) {
   const entry = knowledgeBase.find(item => item.Device === device && item.Issue === issue);
-  return entry ? entry.Solution : 'Solution not found.';
+  return entry ? entry.Solution : null; // Return null if solution is not found
 }
 
 // Function to extract device from message
@@ -80,6 +87,13 @@ function extractIssueFromMessage(message) {
   return 'Unknown';
 }
 
+// Function to get tech support contact information
+function getTechSupportContacts() {
+  return techSupportList.map(support => 
+    `Name: ${support.name}\nContact: ${support.contact}\nPhone: ${support.phone}`
+  ).join('\n\n');
+}
+
 app.post('/api/chat', async (req, res) => {
   const userMessage = req.body.message;
 
@@ -96,7 +110,10 @@ app.post('/api/chat', async (req, res) => {
     // Get the solution from the knowledge base
     const solution = getSolution(device, issue);
 
-    res.status(200).json({ reply: `${text}\n\nAdditional Info: ${solution}` });
+    // Prepare response
+    const additionalInfo = solution ? `Additional Info: ${solution}` : `Sorry, I couldn't find a solution for your issue. Here are some tech support contacts:\n\n${getTechSupportContacts()}`;
+
+    res.status(200).json({ reply: `${text}\n\n${additionalInfo}` });
   } catch (error) {
     console.error('Error processing the AI response:', error);
     res.status(500).json({ error: 'Failed to process the AI response' });
