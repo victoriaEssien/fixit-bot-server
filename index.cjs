@@ -111,7 +111,9 @@ app.post('/api/chat', async (req, res) => {
     const solution = getSolution(device, issue);
 
     // Prepare response
-    const additionalInfo = solution ? `Additional Info: ${solution}` : `Sorry, I couldn't find a solution for your issue. Here are some tech support contacts:\n\n${getTechSupportContacts()}`;
+    const additionalInfo = solution 
+      ? `Additional Info: ${solution}` 
+      : `Sorry, I couldn't find a solution for your issue. Here are some tech support contacts:\n\n${getTechSupportContacts()}`;
 
     res.status(200).json({ reply: `${text}\n\n${additionalInfo}` });
   } catch (error) {
